@@ -1,3 +1,16 @@
+# Welcome to your Draftbit app!
+
+This `README` is designed to help you get your Draftbit app running locally. Read
+through the next few sections carefully, and if you encounter any issues please
+do not hesitate to post in [Community](https://community.draftbit.com).
+
+> Note that all of the commands in this document should be run using your
+> computer's **command line**. If you're unsure of what this is, please read
+> [this](https://tutorial.djangogirls.org/en/intro_to_command_line/) guide
+> before moving on.
+
+Remember, at any point you can go back to [build.draftbit.com](https://build.draftbit.com) and continue building your app
+there!
 
 ## Requirements
 

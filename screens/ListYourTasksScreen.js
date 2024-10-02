@@ -10,7 +10,7 @@ import { useIsFocused } from '@react-navigation/native';
 import { FlashList } from '@shopify/flash-list';
 import { ActivityIndicator, Image, ScrollView, Text, View } from 'react-native';
 import { Fetch } from 'react-request';
-import * as ToDoListApiApi from '../apis/ToDoListApiApi.js';
+import * as XanoAPIApi from '../apis/XanoAPIApi.js';
 import * as GlobalVariables from '../config/GlobalVariableContext';
 import palettes from '../themes/palettes';
 import Breakpoints from '../utils/Breakpoints';
@@ -113,10 +113,10 @@ const ListYourTasksScreen = props => {
         >
           {'What we up to today?'}
         </Text>
-        {/* Medicine List */}
-        <ToDoListApiApi.FetchListTasksGET>
-          {({ loading, error, data, refetchListTasks }) => {
-            const medicineListData = data?.json;
+        {/* To do List */}
+        <XanoAPIApi.FetchToDoListGET>
+          {({ loading, error, data, refetchToDoList }) => {
+            const toDoListData = data?.json;
             if (loading) {
               return <ActivityIndicator />;
             }
@@ -127,7 +127,7 @@ const ListYourTasksScreen = props => {
 
             return (
               <FlashList
-                data={medicineListData}
+                data={toDoListData}
                 estimatedItemSize={50}
                 horizontal={false}
                 inverted={false}
@@ -238,12 +238,11 @@ const ListYourTasksScreen = props => {
                           </View>
                         </View>
                         <Checkbox
-                          onUncheck={() => {
+                          onCheck={() => {
                             const handler = async () => {
                               const checkboxValue = undefined;
                               try {
-                                (await ToDoListApiApi.listTasksGET(Constants))
-                                  ?.json;
+                                (await XanoAPIApi.toDoListGET(Constants))?.json;
                               } catch (err) {
                                 console.error(err);
                               }
@@ -251,7 +250,7 @@ const ListYourTasksScreen = props => {
                             handler();
                           }}
                           color={palettes.App.Option_Selected_Color}
-                          defaultValue={medicineListData?.[0]?.completed}
+                          defaultValue={toDoListData?.[0]?.completed}
                           size={50}
                           uncheckedColor={theme.colors.background.danger}
                         />
@@ -268,7 +267,7 @@ const ListYourTasksScreen = props => {
               />
             );
           }}
-        </ToDoListApiApi.FetchListTasksGET>
+        </XanoAPIApi.FetchToDoListGET>
       </ScrollView>
     </ScreenContainer>
   );
